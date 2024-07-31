@@ -190,7 +190,7 @@ func newCertStateFromConfig(c *config.C) (*CertState, error) {
 	}
 
 	if nebulaCert.Expired(time.Now()) {
-		return nil, fmt.Errorf("nebula certificate for this host is expired")
+		return nil, fmt.Errorf("nebula certificate for this host (%s) is expired (%s)", nebulaCert.Details.Name, time.Now().Sub(nebulaCert.Details.NotAfter))
 	}
 
 	if len(nebulaCert.Details.Ips) == 0 {
